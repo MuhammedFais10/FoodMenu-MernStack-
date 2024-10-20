@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './starRating.module.css';
+import classes from './StarRating.module.css';
 
 export default function StarRating({ stars, size = 18 }) {
   const styles = {

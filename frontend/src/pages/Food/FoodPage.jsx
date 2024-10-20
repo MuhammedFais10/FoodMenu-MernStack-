@@ -13,20 +13,21 @@ function FoodPage() {
   const { addToCart } = useCart();
   const navigate = useNavigate();
 
-
   const handleAddToCart = () => {
     addToCart(food);
     navigate("/cart");
   };
 
   useEffect(() => {
-    getById(id).then(setFood).catch(error => {
-      console.error("Error fetching food:", error);
-    });
+    getById(id)
+      .then(setFood)
+      .catch((error) => {
+        console.error("Error fetching food:", error);
+      });
   }, [id]);
   return (
     <>
-     {!food ? (
+      {!food ? (
         <NotFound message="Food Not Found!" linkText="Back To Homepage" />
       ) : (
         <div className={classes.container}>

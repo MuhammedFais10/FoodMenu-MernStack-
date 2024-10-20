@@ -1,16 +1,15 @@
-import { useParams } from 'react-router-dom';
-import classes from './foodEdit.module.css';
-import { useForm } from 'react-hook-form';
-import { useEffect, useState } from 'react';
-import { add,getById , update} from '../../Services/foodService';
-import Title from '../../Components/Title/Title';
-import InputContainer from '../../Components/InputContainer/InputContainer';
-import Input from '../../Components/Input/Input';
-import Button from '../../Components/Button/Button';
-import { uploadImage } from '../../Services/uploadService';
-import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
-
+import { useParams } from "react-router-dom";
+import classes from "./foodEdit.module.css";
+import { useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
+import { add, getById, update } from "../../Services/foodService";
+import Title from "../../Components/Title/Title";
+import InputContainer from "../../Components/InputContainer/InputContainer";
+import Input from "../../Components/Input/Input";
+import Button from "../../Components/Button/Button";
+import { uploadImage } from "../../Services/uploadService";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export default function FoodEditpage() {
   const { foodId } = useParams();
@@ -29,14 +28,14 @@ export default function FoodEditpage() {
   useEffect(() => {
     if (!isEditMode) return;
 
-    getById(foodId).then(food => {
+    getById(foodId).then((food) => {
       if (!food) return;
       reset(food);
       setImageUrl(food.imageUrl);
     });
   }, [foodId]);
 
-  const submit = async foodData => {
+  const submit = async (foodData) => {
     const food = { ...foodData, imageUrl };
 
     if (isEditMode) {
@@ -47,16 +46,11 @@ export default function FoodEditpage() {
 
     const newFood = await add(food);
     toast.success(`Food "${food.name}" added successfully!`);
-    navigate('/admin/editFood/' + newFood.id, { replace: true });
+    navigate("/admin/editFood/" + newFood.id, { replace: true });
   };
 
-  // const upload = async event => {
-  //   setImageUrl(null);
-  //   const imageUrl = await uploadImage(event);
-  //   setImageUrl(imageUrl);
-  // };
 
-  const upload = async event => {
+  const upload = async (event) => {
     try {
       setImageUrl(null);
       const imageUrl = await uploadImage(event);
@@ -70,7 +64,7 @@ export default function FoodEditpage() {
   return (
     <div className={classes.container}>
       <div className={classes.content}>
-        <Title title={isEditMode ? 'Edit Food' : 'Add Food'} />
+        <Title title={isEditMode ? "Edit Food" : "Add Food"} />
         <form
           className={classes.form}
           onSubmit={handleSubmit(submit)}
@@ -89,39 +83,39 @@ export default function FoodEditpage() {
           <Input
             type="text"
             label="Name"
-            {...register('name', { required: true, minLength: 5 })}
+            {...register("name", { required: true, minLength: 5 })}
             error={errors.name}
           />
 
           <Input
             type="number"
             label="Price"
-            {...register('price', { required: true })}
+            {...register("price", { required: true })}
             error={errors.price}
           />
 
           <Input
             type="text"
             label="Tags"
-            {...register('tags')}
+            {...register("tags")}
             error={errors.tags}
           />
 
           <Input
             type="text"
             label="Origins"
-            {...register('origins', { required: true })}
+            {...register("origins", { required: true })}
             error={errors.origins}
           />
 
           <Input
             type="text"
             label="Cook Time"
-            {...register('cookTime', { required: true })}
+            {...register("cookTime", { required: true })}
             error={errors.cookTime}
           />
 
-          <Button type="submit" text={isEditMode ? 'Update' : 'Create'} />
+          <Button type="submit" text={isEditMode ? "Update" : "Create"} />
         </form>
       </div>
     </div>

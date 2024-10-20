@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer } from 'react';
 import { useParams } from 'react-router-dom';
-import Search from '../../components/Search/Search';
+import Search from '../../Components/Search/Search';
 import Tags from '../../Components/Tags/Tag';
 import Thumbnails from '../../Components/Thumbnails/Thumbnails';
 import {
