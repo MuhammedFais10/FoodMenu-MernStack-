@@ -9,7 +9,7 @@ router.get(
   "/",
   handler(async (req, res) => {
     const foods = await FoodModel.find({});
-    // console.log("Fetched foods:", foods);
+
     res.send(foods);
   })
 );

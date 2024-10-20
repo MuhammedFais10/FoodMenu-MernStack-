@@ -3,21 +3,18 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-<<<<<<< HEAD
-    "start": "cd backend && npm start",
-    "prebuild":"cd backend && npm install && cd ../frontend && npm install",
-=======
-   "start": "cd backend && npm start",
-   "prebuild":"cd backend && npm install && cd ../frontend && npm install",
->>>>>>> c54ab1e210bbb0aaea995e4111b946b069334320
-   "build":"cd frontend && npm run build",
-   "postbuild": "move frontend\\dist backend\\src\\public"
+    "start": " cd Backend && npm start",
+    "prebuild": "cd Backend && npm install && cd ../frontend && npm install",
+    "build": "cd frontend && npm run build",
+  "postbuild":  "move frontend/dist  Backend/src/public"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "engines": {
-    "node":">=20 <23"
+    "node": "18.x"
+  },
+  "devDependencies": {
   }
 }

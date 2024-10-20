@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(
   cors({
     credentials: true,
-    origin: "http://localhost:5173",
+    origin: "http://localhost:5173", // adjust this for production
   })
 );
 
@@ -31,11 +31,14 @@ app.use("/api/upload", uploadRouter);
 const publicFolder = path.join(__dirname, "public");
 app.use(express.static(publicFolder));
 
+// Handle SPA routing for the frontend
 app.get("*", (req, res) => {
   const indexFilePath = path.join(publicFolder, "index.html");
   res.sendFile(indexFilePath);
 });
 
-app.listen(5000, () => {
-  console.log("Server Connected");
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server Connected on PORT ${PORT}`);
 });

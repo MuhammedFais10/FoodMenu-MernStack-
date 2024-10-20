@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import { BAD_REQUEST } from "../constants/httpStatus.js";
 import handler from "express-async-handler";
 import { UserModel } from "../models/UserModel.js";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import auth from "../middleware/auth.mid.js";
 import admin from "../middleware/admin.mid.js";
 

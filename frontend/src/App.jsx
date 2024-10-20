@@ -4,22 +4,20 @@ import Header from "./Components/Header/Header";
 import Loading from "./Components/Loading/Loading";
 import { useLoading } from "./Components/hooks/useLoading";
 import { useEffect } from "react";
-import {setLoadingInterceptor} from "./interceptors/loadingInterceptor.jsx";
-
+import { setLoadingInterceptor } from "./interceptors/loadingInterceptor.jsx";
 
 function App() {
-  const {showLoading, hideLoading} = useLoading()
- useEffect(()=>{
-  setLoadingInterceptor({showLoading,hideLoading})
- },[])
- 
- 
+  const { showLoading, hideLoading } = useLoading();
+  useEffect(() => {
+    setLoadingInterceptor({ showLoading, hideLoading });
+  }, []);
+
   return (
     <>
       <div>
         <Loading />
         <Header />
-        <AppRouter/>
+        <AppRouter />
       </div>
     </>
   );

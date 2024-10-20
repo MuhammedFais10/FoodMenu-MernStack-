@@ -40,7 +40,7 @@ export default function LoginPage() {
             label="Email"
             {...register("email", {
               required: true,
-              pattern:EMAIL,
+              pattern: EMAIL,
             })}
             error={errors.email}
           />
@@ -54,13 +54,13 @@ export default function LoginPage() {
             error={errors.password}
           />
           <Button type="submit" text="Login" />
-       
-       <div className={classes.register}>
-       New user ? &nbsp;
-       <Link to={`/register${returnUrl ? '?returnUrl=' + returnUrl : ''}`}>
-       Register here
-       </Link>
-       </div>
+
+          <div className={classes.register}>
+            New user ? &nbsp;
+            <Link to={`/register${returnUrl ? "?returnUrl=" + returnUrl : ""}`}>
+              Register here
+            </Link>
+          </div>
         </form>
       </div>
     </div>

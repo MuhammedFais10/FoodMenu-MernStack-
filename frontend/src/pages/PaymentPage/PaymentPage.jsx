@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import classes from './paymentPage.module.css';
-import { getNewOrderForCurrentUser } from '../../Services/orderService';
-import Title from '../../Components/Title/Title';
-import OrderItemsList from '../../Components/OrderItemsList/OrderItemsList';
-import Map from '../../Components/Map/Map';
-import PayPalButtons from '../../Components/PaypalButton/PaypalButton';
+import React, { useEffect, useState } from "react";
+import classes from "./paymentPage.module.css";
+import { getNewOrderForCurrentUser } from "../../Services/orderService";
+import Title from "../../Components/Title/Title";
+import OrderItemsList from "../../Components/OrderItemsList/OrderItemsList";
+import Map from "../../Components/Map/Map";
+import PayPalButtons from "../../Components/PaypalButton/PaypalButton";
 
 export default function PaymentPage() {
   const [order, setOrder] = useState(null);
@@ -13,11 +13,11 @@ export default function PaymentPage() {
 
   useEffect(() => {
     getNewOrderForCurrentUser()
-      .then(data => {
+      .then((data) => {
         setOrder(data);
         setLoading(false);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error fetching order:", error);
         setError("Failed to load order details. Please try again later.");
         setLoading(false);
