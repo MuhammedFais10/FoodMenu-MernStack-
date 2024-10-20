@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 import classes from "./header.module.css";
 import { useCart } from "../hooks/useCart";
 import { useAuth } from "../hooks/useAuth";
-//import { useAuth } from "../hooks/useAuth";
+
 
 function Header() {
   const  {user,logout} = useAuth();
+console.log(user);
 
   const { cart } = useCart();
 

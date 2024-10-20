@@ -21,7 +21,7 @@ export default function CartProvider({ children }) {
     const totalCount = sum(cartItems.map((item) => item.quantity));
     setTotalPrice(totalPrice);
     setTotalCount(totalCount);
-    
+
     localStorage.setItem(
       CART_KEY,
       JSON.stringify({
@@ -47,7 +47,6 @@ export default function CartProvider({ children }) {
     );
     setCartItems(filteredCartItems);
     // console.log(foodId);
-    
   };
 
   const changeQuantity = (cartItem, newQuantity) => {
@@ -74,16 +73,15 @@ export default function CartProvider({ children }) {
     }
   };
 
-  const clearCart=() =>{
-    localStorage.removeItem(CART_KEY)
+  const clearCart = () => {
+    localStorage.removeItem(CART_KEY);
 
-    const {items, totalPrice,totalCount} = EMPTY_CART
-    
-setCartItems(items)
-setTotalPrice(totalPrice)
-setTotalCount(totalCount)
+    const { items, totalPrice, totalCount } = EMPTY_CART;
 
-  }
+    setCartItems(items);
+    setTotalPrice(totalPrice);
+    setTotalCount(totalCount);
+  };
 
   return (
     <CartContext.Provider

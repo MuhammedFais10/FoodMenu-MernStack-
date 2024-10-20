@@ -6,6 +6,7 @@ import foodRouter from "./Router/food.router.js";
 import userRouter from "./Router/user.router.js";
 import orderRouter from "./Router/order.router.js";
 import uploadRouter from "./Router/upload.router.js";
+
 import { dbconnect } from "./config/database.config.js";
 dbconnect();
 
@@ -34,6 +35,7 @@ app.get("*", (req, res) => {
   const indexFilePath = path.join(publicFolder, "index.html");
   res.sendFile(indexFilePath);
 });
+
 app.listen(5000, () => {
   console.log("Server Connected");
 });
