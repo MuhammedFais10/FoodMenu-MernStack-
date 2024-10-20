@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { createOrder } from "../../Services/orderService";
-import classes from "./CheckoutPage.module.css";
+import classes from "./checkoutPage.module.css";
 import Title from "../../Components/Title/Title";
 import Input from "../../Components/Input/Input";
 import Button from "../../Components/Button/Button";
@@ -30,12 +30,15 @@ export default function CheckoutPage() {
       return;
     }
 
-
-    await createOrder({ ...order, name: data.name, address: data.address,
-       addressLatLng: order.addressLatLng, user: user._id });
+    await createOrder({
+      ...order,
+      name: data.name,
+      address: data.address,
+      addressLatLng: order.addressLatLng,
+      user: user._id,
+    });
     navigate("/payment");
   };
-
 
   return (
     <>
@@ -62,7 +65,7 @@ export default function CheckoutPage() {
           <Title title="Choose Your Location" fontSize="1.6rem" />
           <Map
             location={order.addressLatLng}
-            onChange={latlng => {
+            onChange={(latlng) => {
               setOrder({ ...order, addressLatLng: latlng });
             }}
           />

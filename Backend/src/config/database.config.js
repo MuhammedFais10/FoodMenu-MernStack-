@@ -3,14 +3,15 @@ import { UserModel } from "../models/UserModel.js";
 import { FoodModel } from "../models/food.model.js";
 import { sample_users } from "../data.js";
 import { Sample_foods } from "../data.js";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
 dotenv.config();
+console.log("MongoDB URI:", process.env.MONGO_URI);
 const PASSWORD_HASH_SALT_ROUNDS = 10;
 set("strictQuery", true);
 export const dbconnect = async () => {
   try {
-    connect(process.env.MONGO_URI);
+    await connect(process.env.MONGO_URI);
     await seedUsers();
     await seedFoods();
     console.log("connect successfully---");
