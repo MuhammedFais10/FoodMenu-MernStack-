@@ -3,8 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+<<<<<<< HEAD
     "start": "cd backend && npm start",
     "prebuild":"cd backend && npm install && cd ../frontend && npm install",
+=======
+   "start": "cd backend && npm start",
+   "prebuild":"cd backend && npm install && cd ../frontend && npm install",
+>>>>>>> c54ab1e210bbb0aaea995e4111b946b069334320
    "build":"cd frontend && npm run build",
    "postbuild": "move frontend\\dist backend\\src\\public"
   },
