@@ -6,7 +6,7 @@
     "start": " cd Backend && npm start",
     "prebuild": "cd Backend && npm install && cd ../frontend && npm install",
     "build": "cd frontend && npm run build",
-  "postbuild":  "move frontend/dist  Backend/src/public"
+"postbuild": "node moveFiles.js"
   },
   "keywords": [],
   "author": "",
