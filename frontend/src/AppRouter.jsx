@@ -32,7 +32,7 @@ function AppRouter() {
         <Route
           path="/checkout"
           element={
-            <AuthRoute>
+            <AuthRoute> 
               <CheckoutPage />
             </AuthRoute>
           }
