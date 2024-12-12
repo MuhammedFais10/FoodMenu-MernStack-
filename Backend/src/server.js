@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(
   cors({
     credentials: true,
-    origin: "http://localhost:5173", // adjust this for production
+    origin: ["http://localhost:5173"], // adjust this for production
   })
 );
 
@@ -35,6 +35,9 @@ app.use(express.static(publicFolder));
 app.get("*", (req, res) => {
   const indexFilePath = path.join(publicFolder, "index.html");
   res.sendFile(indexFilePath);
+});
+app.get("/", (req, res) => {
+  res.json("HELOOO");
 });
 
 const PORT = process.env.PORT || 5000;
