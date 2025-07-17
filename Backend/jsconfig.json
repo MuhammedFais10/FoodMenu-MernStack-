@@ -1,13 +1,13 @@
-// {
-//   "compilerOptions": {
-//     "moduleResolution": "node"
-//   },
-//   "include": ["src", "src/data.js"]
-// }
-
 {
   "compilerOptions": {
     "moduleResolution": "node"
   },
-  "include": ["src"]
+  "include": ["src", "src/data.js"]
 }
+
+// {
+//   "compilerOptions": {
+//     "moduleResolution": "node"
+//   },
+//   "include": ["src"]
+// }
