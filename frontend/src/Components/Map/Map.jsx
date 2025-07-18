@@ -50,14 +50,14 @@ function FindButtonAndMarker({ readonly, location, onChange }) {
   }, [position]);
   const map = useMapEvents({
     click(e) {
-      !readonly && setPosition(e.latlng);
+      !readonly && setPosition(e?.latlng);
     },
     locationfound(e) {
-      setPosition(e.latlng);
-      map.flyTo(e.latlng, 13);
+      setPosition(e?.latlng);
+      map.flyTo(e?.latlng, 13);
     },
     locationerror(e) {
-      toast.error(e.message);
+      toast.error(e?.message);
     },
   });
   const markerIcon = new L.Icon({
@@ -75,7 +75,7 @@ function FindButtonAndMarker({ readonly, location, onChange }) {
         <button
           type="button"
           className={classes.find_location}
-          onClick={() => map.locate()}
+          onClick={() => map?.locate()}
         >
           Find My Location
         </button>
@@ -85,7 +85,7 @@ function FindButtonAndMarker({ readonly, location, onChange }) {
         <Marker
           eventHandlers={{
             dragend: (e) => {
-              setPosition(e.target.getLatLng());
+              setPosition(e?.target.getLatLng());
             },
           }}
           position={position}
