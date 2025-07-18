@@ -35,12 +35,12 @@ useEffect(() => {
     order && (
       <div className={classes.container}>
         <div className={classes.content}>
-          <h1>Order #{order._id}</h1>{" "}
+          <h1>Order #{order?._id}</h1>{" "}
           {/* Make sure the order ID is displayed correctly */}
           <div className={classes.header}>
             <div>
               <strong>Date</strong>
-              <DateTime date={order.createdAt} />
+              <DateTime date={order?.createdAt} />
             </div>
             <div>
               <strong>Name</strong>
@@ -65,7 +65,7 @@ useEffect(() => {
         </div>
         <div>
           <Title title="Your Location" fontSize="1.6rem" />
-          <Map location={order.addressLatLng} readonly={true} />
+          <Map location={order?.addressLatLng} readonly={true} />
         </div>
         {order.status === "NEW" && (
           <div className={classes.payment}>

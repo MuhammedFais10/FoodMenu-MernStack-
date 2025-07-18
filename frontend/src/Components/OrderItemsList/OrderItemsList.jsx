@@ -12,7 +12,7 @@ export default function OrderItemsList({order}) {
             <h3>Order Items:</h3>
           </td>
         </tr>
-        {order.items.map(item => (
+        {(order?.items || [])?.map(item => (
           <tr key={item.food.id}>
             <td>
               <Link to={`/foods/${item.food.id}`}>

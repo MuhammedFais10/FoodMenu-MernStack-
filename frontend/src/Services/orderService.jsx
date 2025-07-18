@@ -23,7 +23,7 @@ export const getNewOrderForCurrentUser = async () => {
 
 export const pay = async (paymentId) => {
   try {
-    const { data } = await axios.put("/api/orders/pay", { paymentId });
+    const { data } = await axios?.put("/api/orders/pay", { paymentId });
     console.log(paymentId);
     return data;
   } catch (error) {
@@ -35,7 +35,7 @@ export const pay = async (paymentId) => {
 export const trackOrderById = async (orderId) => {
   try {
     console.log("Order ID being sent to API:", JSON.stringify(orderId)); // Convert object to string for logging
-    const { data } = await axios.get(`/api/orders/track/${JSON.stringify(orderId)}`); // Convert to string for API call
+    const { data } = await axios?.get(`/api/orders/track/${JSON.stringify(orderId)}`); // Convert to string for API call
     
     return data;
   } catch (error) {
