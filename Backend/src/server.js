@@ -19,7 +19,7 @@ app.use(
     credentials: true,
     origin: [
       "http://localhost:5173",
-      "https://your-frontend-name.vercel.app", // 🔁 replace with real frontend URL
+      // 🔁 replace with real frontend URL
     ],
   })
 );
@@ -37,9 +37,6 @@ app.use("/api/upload", uploadRouter);
 //   const indexFilePath = path.join(publicFolder, "index.html");
 //   res.sendFile(indexFilePath);
 // });
-app.get("/", (req, res) => {
-  res.send("HELOOO");
-});
 
 const PORT = process.env.PORT || 5000;
 
