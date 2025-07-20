@@ -19,7 +19,7 @@ app.use(
     credentials: true,
     origin: [
       "http://localhost:5173",
-      "https://your-frontend-name.vercel.app", // 🔁 replace with real frontend URL
+      "https://foodmenufrontend.vercel.app/", // 🔁 replace with real frontend URL
     ],
   })
 );
