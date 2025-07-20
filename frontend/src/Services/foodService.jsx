@@ -1,4 +1,6 @@
-import axios from "axios";
+import axios from "../axiosConfig"
+
+
 export const getAll = async () => {
   try { 
   const { data } = await axios.get('/api/foods');
