@@ -4,8 +4,13 @@ import Price from "../Price/Price";
 import StarRating from "../StarRating/StarRating";
 import classes from "./Thumbnail.module.css";
 
-export default function Thumbnails({ foods }) {
+export default function Thumbnails({ foods}) {
   console.log("Foods in Thumbnails:", foods);
+
+    
+ if (!Array.isArray(foods)) return <p>Invalid food data</p>;
+
+
 
   return (
     <ul className={classes.list}>

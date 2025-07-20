@@ -46,6 +46,7 @@ export default function HomePage() {
       <Tags tags={tags} />
       {foods.length === 0 && <NotFound linkText="Reset Search" />}
       <Thumbnails foods={foods} />
+ 
     </>
   );
 }
