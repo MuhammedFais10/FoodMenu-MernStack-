@@ -15,11 +15,13 @@ const __dirname = dirname(__filename);
 
 const app = express();
 
-app.use(express.json());
 app.use(
   cors({
     credentials: true,
-    origin: ["http://localhost:5173"], // adjust this for production
+    origin: [
+      "http://localhost:5173",
+      "https://your-frontend-name.vercel.app", // 🔁 replace with real frontend URL
+    ],
   })
 );
 
@@ -28,16 +30,16 @@ app.use("/api/users", userRouter);
 app.use("/api/orders", orderRouter);
 app.use("/api/upload", uploadRouter);
 
-const publicFolder = path.join(__dirname, "public");
-app.use(express.static(publicFolder));
+// const publicFolder = path.join(__dirname, "public");
+// app.use(express.static(publicFolder));
 
-// Handle SPA routing for the frontend
-app.get("*", (req, res) => {
-  const indexFilePath = path.join(publicFolder, "index.html");
-  res.sendFile(indexFilePath);
-});
+// // Handle SPA routing for the frontend
+// app.get("*", (req, res) => {
+//   const indexFilePath = path.join(publicFolder, "index.html");
+//   res.sendFile(indexFilePath);
+// });
 app.get("/", (req, res) => {
-  res.json("HELOOO");
+  res.send("HELOOO");
 });
 
 const PORT = process.env.PORT || 5000;
