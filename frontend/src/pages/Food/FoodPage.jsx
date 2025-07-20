@@ -33,7 +33,7 @@ function FoodPage() {
         <div className={classes.container}>
           <img
             className={classes.image}
-            src={`${food.imageUrl}`}
+            src={`${food?.imageUrl}`}
             alt={food.name}
           />
           <div className={classes.details}>
@@ -51,7 +51,7 @@ function FoodPage() {
               <StarRating stars={food.stars} size={25} />
             </div>
             <div className={classes.origins}>
-              {food.origin?.map((origin, index) => (
+              {food.origins?.map((origin, index) => (
                 <span key={index}>{origin}</span>
               ))}
             </div>
