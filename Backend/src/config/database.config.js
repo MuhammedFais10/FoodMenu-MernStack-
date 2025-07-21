@@ -52,10 +52,10 @@ const uploadImageToCloudinary = (imagePath) => {
 
 export async function seedFoods() {
   const count = await FoodModel.countDocuments();
-  // if (count > 0) {
-  //   console.log("Foods already seeded.");
-  //   return;
-  // }
+  if (count > 0) {
+    console.log("Foods already seeded.");
+    return;
+  }
 
   const uploadedFoods = [];
 
@@ -74,7 +74,7 @@ export async function seedFoods() {
       uploadedFoods.push({
         ...food,
         imageUrl: cloudImageUrl,
-        origins: food.origin, // fix: in DB schema it's 'origins'
+        origins: food.origins, // fix: in DB schema it's 'origins'
       });
     } catch (error) {
       console.error(`❌ Failed to upload ${food.name}:`, error);
@@ -84,17 +84,3 @@ export async function seedFoods() {
   await FoodModel.insertMany(uploadedFoods);
   console.log("✅ Food seed with Cloudinary images complete.");
 }
-// async function seedFoods() {
-//   const foods = await FoodModel.countDocuments();
-//   if (foods > 0) {
-//     console.log("Foods seed is already done!");
-//     return;
-//   }
-
-//   for (const food of Sample_foods) {
-//     food.imageUrl = `${food.imageUrl}`;
-//     await FoodModel.create(food);
-//   }
-
-//   console.log("Foods seed Is Done!");
-// }
