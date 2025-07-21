@@ -3,9 +3,14 @@ import { UserModel } from "../models/UserModel.js";
 import { FoodModel } from "../models/food.model.js";
 import { sample_users } from "../data.js";
 import { Sample_foods } from "../data.js";
+import { configCloudinary } from "./cloudinary.config.js";
+import fs from "fs";
+import { v2 as cloudinary } from "cloudinary";
+import path from "path";
 import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
 dotenv.config();
+configCloudinary();
 console.log("MongoDB URI:", process.env.MONGO_URI);
 const PASSWORD_HASH_SALT_ROUNDS = 10;
 set("strictQuery", true);
@@ -34,18 +39,62 @@ async function seedUsers() {
 
   console.log("Users seed is done!");
 }
+////////////////////////////////////////////////
 
-async function seedFoods() {
-  const foods = await FoodModel.countDocuments();
-  if (foods > 0) {
-    console.log("Foods seed is already done!");
-    return;
-  }
+const uploadImageToCloudinary = (imagePath) => {
+  return new Promise((resolve, reject) => {
+    cloudinary.uploader.upload(imagePath, (error, result) => {
+      if (error || !result) reject(error);
+      else resolve(result.secure_url); // get https image URL
+    });
+  });
+};
+
+export async function seedFoods() {
+  const count = await FoodModel.countDocuments();
+  // if (count > 0) {
+  //   console.log("Foods already seeded.");
+  //   return;
+  // }
+
+  const uploadedFoods = [];
 
   for (const food of Sample_foods) {
-    food.imageUrl = `${food.imageUrl}`;
-    await FoodModel.create(food);
+    const localPath = path.join(
+      path.resolve(),
+      "src", // 👈 correct this part
+      "public",
+      "foods",
+      path.basename(food.imageUrl)
+    );
+
+    try {
+      const cloudImageUrl = await uploadImageToCloudinary(localPath);
+
+      uploadedFoods.push({
+        ...food,
+        imageUrl: cloudImageUrl,
+        origins: food.origin, // fix: in DB schema it's 'origins'
+      });
+    } catch (error) {
+      console.error(`❌ Failed to upload ${food.name}:`, error);
+    }
   }
 
-  console.log("Foods seed Is Done!");
+  await FoodModel.insertMany(uploadedFoods);
+  console.log("✅ Food seed with Cloudinary images complete.");
 }
+// async function seedFoods() {
+//   const foods = await FoodModel.countDocuments();
+//   if (foods > 0) {
+//     console.log("Foods seed is already done!");
+//     return;
+//   }
+
+//   for (const food of Sample_foods) {
+//     food.imageUrl = `${food.imageUrl}`;
+//     await FoodModel.create(food);
+//   }
+
+//   console.log("Foods seed Is Done!");
+// }
