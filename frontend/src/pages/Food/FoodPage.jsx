@@ -15,7 +15,7 @@ function FoodPage() {
 
   const handleAddToCart = () => {
     addToCart(food);
-    navigate("/cart");
+    navigate(`/cart/${food.id}`);
   };
 
   useEffect(() => {

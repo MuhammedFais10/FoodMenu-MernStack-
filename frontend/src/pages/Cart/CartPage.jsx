@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useCart } from "../../Components/hooks/useCart";
 import Title from "../../Components/Title/Title";
 import classes from "./CartPage.module.css";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Price from "../../Components/Price/Price";
 import NotFound from "../../Components/NotFound/NotFound";
 
 export default function CartPage() {
+   const { id } = useParams();
   const { cart, removeFromCart, changeQuantity } = useCart();
+
+   useEffect(() => {
+    console.log("Cart Page ID from URL:", id); // For debugging or tracking
+  }, [id]);
   return (
     <>
       <Title title="Cart Page" margin="1.5rem 0 0 2.5rem" />
