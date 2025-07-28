@@ -1,5 +1,5 @@
 // userService.js
-import axios from "axios";
+import axios from "../axiosConfig"
 
 export const getUser = () =>
   localStorage.getItem("user")
@@ -7,13 +7,13 @@ export const getUser = () =>
     : null;
 
 export const login = async (email, password) => {
-  const { data } = await axios?.post("api/users/login", { email, password });
+  const { data } = await axios?.post("/api/users/login", { email, password });
   localStorage.setItem("user", JSON.stringify(data));
   return data;
 };
 
 export const register = async (registerData) => {
-  const { data } = await axios?.post("api/users/register", registerData);
+  const { data } = await axios?.post("/api/users/register", registerData);
   localStorage.setItem("user", JSON.stringify(data));
   return data;
 };

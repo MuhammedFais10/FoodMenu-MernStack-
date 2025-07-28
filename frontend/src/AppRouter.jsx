@@ -26,7 +26,7 @@ function AppRouter() {
         <Route path="/search/:searchTerm" element={<Homepage />} />
         <Route path="/tag/:tag" element={<Homepage />} />
         <Route path="/foods/:id" element={<FoodPage />} />
-        <Route path="/cart/:id" element={<CartPage />} />
+        <Route path="/cart" element={<CartPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route
