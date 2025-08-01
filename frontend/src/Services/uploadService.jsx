@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import axios from "axios";
+import axios from "../axiosConfig"
 
 export const uploadImage = async (event) => {
   let toastId = null;
