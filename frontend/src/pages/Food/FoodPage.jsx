@@ -12,6 +12,7 @@ function FoodPage() {
   const { id } = useParams();
   const { addToCart } = useCart();
   const navigate = useNavigate();
+console.log("foodpage==",food);
 
   const handleAddToCart = () => {
     addToCart(food);
