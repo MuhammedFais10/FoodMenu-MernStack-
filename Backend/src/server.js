@@ -20,6 +20,7 @@ app.use(
     origin: [
       "http://localhost:5173",
       "https://main-portfolio-ruddy-alpha.vercel.app", // 🔁 replace with real frontend URL
+      "https://frontendfoodmine.vercel.app",
     ],
   })
 );
