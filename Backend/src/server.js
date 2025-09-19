@@ -19,7 +19,7 @@ app.use(
     credentials: true,
     origin: [
       "http://localhost:5173",
-      "https://frontendfoodmine.vercel.app", // 🔁 replace with real frontend URL
+      "https://main-portfolio-ruddy-alpha.vercel.app", // 🔁 replace with real frontend URL
     ],
   })
 );
