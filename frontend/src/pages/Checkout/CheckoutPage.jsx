@@ -24,21 +24,33 @@ export default function CheckoutPage() {
     handleSubmit,
   } = useForm();
 
-  const submit = async (data) => {
-    if (!order.addressLatLng) {
-      toast.warning("Please select your location on the map");
-      return;
-    }
+const submit = async (data) => {
+  if (!order.addressLatLng) {
+    toast.warning("Please select your location on the map");
+    return;
+  }
 
-    await createOrder({
-      ...order,
-      name: data.name,
-      address: data.address,
-      addressLatLng: order.addressLatLng,
-      user: user._id,
-    });
-    navigate("/payment");
+  const newOrder = {
+    name: data.name,
+    address: data.address,
+    addressLatLng: {
+      lat: order.addressLatLng.lat,
+      lng: order.addressLatLng.lng,
+    },
+    totalPrice: cart.totalPrice,   // ✅ from cart
+    items: cart.items.map((item) => ({
+      food: item.food,            // ✅ full food object (needed by schema)
+      quantity: item.quantity,
+      price: item.food.price * item.quantity, // auto-calculated but safe
+    })),
+    user: user._id,
   };
+
+  console.log("Order being sent:", JSON.stringify(newOrder, null, 2));
+
+  await createOrder(newOrder);
+  navigate("/payment");
+};
 
   return (
     <>
@@ -66,7 +78,7 @@ export default function CheckoutPage() {
           <Map
             location={order.addressLatLng}
             onChange={(latlng) => {
-              setOrder({ ...order, addressLatLng: latlng });
+              setOrder({ ...order,  addressLatLng: { lat: latlng.lat, lng: latlng.lng }, });
             }}
           />
         </div>

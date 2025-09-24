@@ -12,12 +12,15 @@ import { toast } from "react-toastify";
 import * as L from "leaflet";
 
 export default function Map({ readonly, location, onChange }) {
+  const defaultPosition = [20, 78];
+
+  const [position, setPosition] = useState(location || null);
   return (
     <div className={classes.container}>
       <MapContainer
         className={classes.map}
-        center={[0, 0]}
-        zoom={1}
+        center={position || defaultPosition}
+        zoom={13}
         dragging={!readonly}
         touchZoom={!readonly}
         doubleClickZoom={!readonly}
@@ -27,9 +30,10 @@ export default function Map({ readonly, location, onChange }) {
         attributionControl={false}
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-        <FindButtonAndMarker
+        <LocationMarker
           readonly={readonly}
-          location={location}
+          position={position}
+          setPosition={setPosition}
           onChange={onChange}
         />
       </MapContainer>
@@ -37,36 +41,40 @@ export default function Map({ readonly, location, onChange }) {
   );
 }
 
-function FindButtonAndMarker({ readonly, location, onChange }) {
-  const [position, setPosition] = useState(location);
 
-  useEffect(() => {
-    console.log(position);
-    if (readonly) {
-      map.setView(position, 13);
-      return;
-    }
-    if (position) onChange(position);
-  }, [position]);
+
+
+function LocationMarker({ readonly, position, setPosition, onChange }) {
   const map = useMapEvents({
     click(e) {
-      !readonly && setPosition(e?.latlng);
+      if (!readonly) {
+        setPosition(e.latlng);
+        onChange && onChange(e.latlng);
+      }
     },
     locationfound(e) {
-      setPosition(e?.latlng);
-      map.flyTo(e?.latlng, 13);
+      setPosition(e.latlng);
+      map.flyTo(e.latlng, 13);
+      onChange && onChange(e.latlng);
     },
-    locationerror(e) {
-      toast.error(e?.message);
+    locationerror() {
+      toast.error("Location access denied or unavailable");
     },
   });
+
+  useEffect(() => {
+    if (!readonly && !position) {
+      map.locate({ setView: true, enableHighAccuracy: true });
+    }
+  }, [readonly, position, map]);
+
   const markerIcon = new L.Icon({
     iconUrl: "/marker-icon-2x.png",
     iconSize: [23, 40],
     iconAnchor: [12.5, 41],
     popupAnchor: [0, -41],
-    shadowUrl: "/marker-shadow.png", // Replace with the path to your marker shadow icon
-    shadowSize: [40, 40], // Size of the shadow icon
+    shadowUrl: "/marker-shadow.png",
+    shadowSize: [40, 40],
   });
 
   return (
@@ -75,21 +83,22 @@ function FindButtonAndMarker({ readonly, location, onChange }) {
         <button
           type="button"
           className={classes.find_location}
-          onClick={() => map?.locate()}
+          onClick={() => map.locate({ setView: true, enableHighAccuracy: true })}
         >
           Find My Location
         </button>
       )}
-
       {position && (
         <Marker
-          eventHandlers={{
-            dragend: (e) => {
-              setPosition(e?.target.getLatLng());
-            },
-          }}
           position={position}
           draggable={!readonly}
+          eventHandlers={{
+            dragend: (e) => {
+              const latlng = e.target.getLatLng();
+              setPosition(latlng);
+              onChange && onChange(latlng);
+            },
+          }}
           icon={markerIcon}
         >
           <Popup>Shipping Location</Popup>
@@ -98,3 +107,6 @@ function FindButtonAndMarker({ readonly, location, onChange }) {
     </>
   );
 }
+
+
+

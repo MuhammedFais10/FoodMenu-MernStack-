@@ -5,8 +5,8 @@ import { FoodModel } from "./food.model.js";
 // Define the LatLngSchema
 export const LatLngSchema = new Schema(
   {
-    lat: { type: String, required: true },
-    lng: { type: String, required: true },
+    lat: { type: Number, required: true },
+    lng: { type: Number, required: true },
   },
   {
     _id: false,

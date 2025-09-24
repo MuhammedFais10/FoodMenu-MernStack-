@@ -34,9 +34,8 @@ export const pay = async (paymentId) => {
 
 export const trackOrderById = async (orderId) => {
   try {
-    console.log("Order ID being sent to API:", JSON.stringify(orderId)); // Convert object to string for logging
-    const { data } = await axios?.get(`/api/orders/track/${JSON.stringify(orderId)}`); // Convert to string for API call
-    
+    console.log("Order ID being sent to API:", orderId);
+    const { data } = await axios.get(`/api/orders/track/${orderId}`);
     return data;
   } catch (error) {
     console.error("Error fetching order:", error);
