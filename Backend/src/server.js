@@ -33,7 +33,7 @@ app.use("/api/upload", uploadRouter);
 const publicFolder = path.join(__dirname, "public");
 app.use(express.static(publicFolder));
 
-app.get("/", (res, req) => {
+app.get("/", (req, res) => {
   res.send("hello");
 });
 
