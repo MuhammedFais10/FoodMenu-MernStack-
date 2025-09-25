@@ -52,21 +52,29 @@ function LocationMarker({ readonly, position, setPosition, onChange }) {
         onChange && onChange(e.latlng);
       }
     },
-    locationfound(e) {
-      setPosition(e.latlng);
-      map.flyTo(e.latlng, 13);
-      onChange && onChange(e.latlng);
-    },
-    locationerror() {
-      toast.error("Location access denied or unavailable");
-    },
+   locationfound(e) {
+  console.log("📍 Location found:", e.latlng);
+  setPosition(e.latlng);
+  map.flyTo(e.latlng, 13);
+  onChange && onChange(e.latlng);
+},
+locationerror(e) {
+  console.error("❌ Location error:", e);
+  toast.error("Location access denied or unavailable");
+},
+
   });
 
   useEffect(() => {
-    if (!readonly && !position) {
-      map.locate({ setView: true, enableHighAccuracy: true });
+    if (!readonly ) {
+     map.locate({
+  setView: true,
+  maxZoom: 16,
+  enableHighAccuracy: true,
+  timeout: 10000,
+});
     }
-  }, [readonly, position, map]);
+  }, [readonly, map]);
 
   const markerIcon = new L.Icon({
     iconUrl: "/marker-icon-2x.png",
@@ -90,7 +98,7 @@ function LocationMarker({ readonly, position, setPosition, onChange }) {
       )}
       {position && (
         <Marker
-          position={position}
+        position={Array.isArray(position) ? position : [position.lat, position.lng]}
           draggable={!readonly}
           eventHandlers={{
             dragend: (e) => {
