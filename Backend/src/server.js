@@ -33,6 +33,10 @@ app.use("/api/upload", uploadRouter);
 const publicFolder = path.join(__dirname, "public");
 app.use(express.static(publicFolder));
 
+app.get("/", (res, req) => {
+  res.send("hello");
+});
+
 // Handle SPA routing for the frontend
 app.get("*", (req, res) => {
   const indexFilePath = path.join(publicFolder, "index.html");
