@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import axios from "../axiosConfig"
+import axios1 from "../axiosConfig"
 
 export const uploadImage = async (event) => {
   let toastId = null;
@@ -7,7 +7,7 @@ export const uploadImage = async (event) => {
   if (!image) return null;
   const formData = new FormData();
   formData.append("image", image, image.name);
-  const response = await axios.post(
+  const response = await axios1.post(
     "http://localhost:5000/api/upload",
     formData,
     {

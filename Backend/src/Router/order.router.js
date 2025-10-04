@@ -13,16 +13,30 @@ router.use(auth);
 router.post(
   "/create",
   handler(async (req, res) => {
+    const order = req.body; // ✅ Declare first
+
+    console.log("📦 Incoming order:", order);
+    console.log("🔹 Authenticated user:", req.user);
+
     try {
-      const order = req.body;
-      if (order.items.length <= 0) {
+      if (!req.user || !req.user.id) {
+        return res.status(401).send("Unauthorized: missing user");
+      }
+
+      if (!order.items || order.items.length <= 0) {
         return res.status(BAD_REQUEST).send("Cart Is Empty!");
       }
+
       await OrderModel.deleteOne({
         user: req.user.id,
         status: OrderStatus.NEW,
       });
-      const newOrder = new OrderModel({ ...order, user: req.user.id });
+
+      const newOrder = new OrderModel({
+        ...order,
+        user: req.user.id,
+      });
+
       await newOrder.save();
       res.send(newOrder);
     } catch (error) {

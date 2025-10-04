@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useCart } from "../../Components/hooks/useCart";
 import { useAuth } from "../../Components/hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { createOrder } from "../../Services/orderService";
@@ -84,12 +84,14 @@ const submit = async (data) => {
         </div>
         <div className={classes.buttons_container}>
           <div className={classes.buttons}>
+         
             <Button
               type="submit"
               text="Go To Payment"
               width="100%"
               height="3rem"
             />
+        
           </div>
         </div>
       </form>

@@ -1,18 +1,21 @@
-import axios from "../axiosConfig"
+import axios1 from "../axiosConfig"
 
 export const createOrder = async (order) => {
   try {
-    const { data } = await axios.post("/api/orders/create", order);
+    const { data } = await axios1.post("/api/orders/create", order);
+      console.log(data);
     return data;
+  
+    
   } catch (error) {
-    console.error("Error creating order:", error);
+    console.error("Error creating order from frontend:", error);
     throw error;
   }
 };
 
 export const getNewOrderForCurrentUser = async () => {
   try {
-    const { data } = await axios.get("/api/orders/newOrderForCurrentUser");
+    const { data } = await axios1.get("/api/orders/newOrderForCurrentUser");
 
     return data;
   } catch (error) {
@@ -23,7 +26,7 @@ export const getNewOrderForCurrentUser = async () => {
 
 export const pay = async (paymentId) => {
   try {
-    const { data } = await axios?.put("/api/orders/pay", { paymentId });
+    const { data } = await axios1?.put("/api/orders/pay", { paymentId });
     console.log(paymentId);
     return data;
   } catch (error) {
@@ -35,7 +38,7 @@ export const pay = async (paymentId) => {
 export const trackOrderById = async (orderId) => {
   try {
     console.log("Order ID being sent to API:", orderId);
-    const { data } = await axios.get(`/api/orders/track/${orderId}`);
+    const { data } = await axios1.get(`/api/orders/track/${orderId}`);
     return data;
   } catch (error) {
     console.error("Error fetching order:", error);
@@ -45,11 +48,11 @@ export const trackOrderById = async (orderId) => {
 
 
 export const getAll = async (state) => {
-  const { data } = await axios.get(`/api/orders/${state ?? ""}`);
+  const { data } = await axios1.get(`/api/orders/${state ?? ""}`);
   return data;
 };
 
 export const getAllStatus = async () => {
-  const { data } = await axios.get(`/api/orders/allstatus`);
+  const { data } = await axios1.get(`/api/orders/allstatus`);
   return data;
 };

@@ -1,9 +1,9 @@
-import axios from "../axiosConfig"
+import axios1 from "../axiosConfig"
 
 
 export const getAll = async () => {
   try { 
-  const { data } = await axios.get('/api/foods');
+  const { data } = await axios1.get('/api/foods');
  console.log(data);
  
   return data
@@ -13,32 +13,32 @@ export const getAll = async () => {
 }
 };
 export const search = async searchTerm => {
-  const { data } = await axios.get('/api/foods/search/' + searchTerm);
+  const { data } = await axios1.get('/api/foods/search/' + searchTerm);
   return data;
 };
 export const getAllTags = async () => {
-  const { data } = await axios.get('/api/foods/tags');
+  const { data } = await axios1.get('/api/foods/tags');
   return data;
 };
 export const getAllByTag = async tag => {
   if (tag === 'All') return getAll();
-  const { data } = await axios.get('/api/foods/tag/' + tag);
+  const { data } = await axios1.get('/api/foods/tag/' + tag);
   return data;
 };
 export const getById = async (id) => {
-  const { data } = await axios.get(`/api/foods/${id}`);
+  const { data } = await axios1.get(`/api/foods/${id}`);
   return data;
 };
 
 export async function deleteById(foodId) {
-  await axios.delete('/api/foods/' + foodId);
+  await axios1.delete('/api/foods/' + foodId);
 }
 
 export async function update(food) {
-  await axios.put('/api/foods', food);
+  await axios1.put('/api/foods', food);
 }
 
 export async function add(food) {
-  const { data } = await axios.post('/api/foods', food);
+  const { data } = await axios1.post('/api/foods', food);
   return data;
 }

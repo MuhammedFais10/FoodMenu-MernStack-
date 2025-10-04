@@ -19,7 +19,7 @@ app.use(
     credentials: true,
     origin: [
       "http://localhost:5173",
-      "https://main-portfolio-ruddy-alpha.vercel.app", // 🔁 replace with real frontend URL
+      "https://main-portfolio-ruddy-alpha.vercel.app",
       "https://frontendfoodmine.vercel.app",
     ],
   })
@@ -33,9 +33,9 @@ app.use("/api/upload", uploadRouter);
 const publicFolder = path.join(__dirname, "public");
 app.use(express.static(publicFolder));
 
-app.get("/", (req, res) => {
-  res.send("hello");
-});
+// app.get("/", (req, res) => {
+//   res.send("hello");
+// });
 
 // Handle SPA routing for the frontend
 app.get("*", (req, res) => {
