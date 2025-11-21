@@ -73,8 +73,6 @@ export default function CartProvider({ children }) {
   );
 }
 
-//export const useCart = () => useContext(CartContext)
-
 export const useCart = () => {
   const context = useContext(CartContext);
   if (!context) {
