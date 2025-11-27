@@ -7,7 +7,15 @@ export const UserSchema = new Schema(
     address: { type: String, require: true },
     isAdmin: { type: Boolean, default: false },
     isBlocked: { type: Boolean, default: false },
+
+    cart: [
+      {
+        food: { type: Schema.Types.ObjectId, ref: "food" },
+        quantity: { type: Number, default: 1 },
+      },
+    ],
   },
+
   {
     timestamps: true,
     toJSON: {

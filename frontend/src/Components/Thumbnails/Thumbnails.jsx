@@ -10,7 +10,7 @@ export default function Thumbnails({ foods}) {
     
  if (!Array.isArray(foods)) return <p>Invalid food data</p>;
 
-
+if (!foods || foods.length === 0) return <p>Loading foods...</p>;
 
   return (
     <ul className={classes.list}>

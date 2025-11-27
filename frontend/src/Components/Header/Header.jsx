@@ -6,10 +6,10 @@ import { useAuth } from "../hooks/useAuth";
 
 
 function Header() {
-  const  {user,logout} = useAuth();
-console.log(user);
+  const { user, logout } = useAuth();
+  console.log(user);
 
-  const { cart } = useCart();
+  const { cart, clearCart } = useCart();
 
   return (
     <header className={classes.header}>
@@ -19,13 +19,13 @@ console.log(user);
         </Link>
         <nav>
           <ul>
-            {user ? (
+            {user !== null ? (
               <li className={classes.menu_container}>
                 <Link to="/dashboard">{user.name}</Link>
                 <div className={classes.menu}>
                   <Link to="/profile">Profile</Link>
                   <Link to="/orders">Orders</Link>
-                  <a onClick={logout}>LogOut</a>
+               <a onClick={() => logout(clearCart)}>LogOut</a>
                 </div>
               </li>
             ) : (

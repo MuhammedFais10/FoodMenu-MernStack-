@@ -145,6 +145,49 @@ router.put(
   })
 );
 
+// ----------------------------------------
+//             CART ROUTES
+// ----------------------------------------
+router.get("/cart", auth, async (req, res) => {
+  const user = await UserModel.findById(req.user.id).populate("cart.food");
+  res.send({ success: true, cart: user.cart });
+});
+
+router.post("/cart/add", auth, async (req, res) => {
+  const { foodId } = req.body;
+  const user = await UserModel.findById(req.user.id);
+
+  const exists = user.cart.find((i) => i.food == foodId);
+
+  if (exists) {
+    exists.quantity += 1;
+  } else {
+    user.cart.push({ food: foodId, quantity: 1 });
+  }
+
+  await user.save();
+  const updated = await user.populate("cart.food");
+  res.send({ success: true, cart: updated.cart });
+});
+
+router.post("/cart/remove", auth, async (req, res) => {
+  const { foodId } = req.body;
+
+  const user = await UserModel.findById(req.user.id);
+  user.cart = user.cart.filter((i) => i.food != foodId);
+
+  await user.save();
+  const updated = await user.populate("cart.food");
+  res.send({ success: true, cart: updated.cart });
+});
+
+router.post("/cart/clear", auth, async (req, res) => {
+  const user = await UserModel.findById(req.user.id);
+  user.cart = [];
+  await user.save();
+  res.send({ success: true });
+});
+
 const generateTokenResponse = (user) => {
   const token = jwt.sign(
     {
