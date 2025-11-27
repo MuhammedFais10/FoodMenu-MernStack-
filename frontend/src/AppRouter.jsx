@@ -7,7 +7,7 @@ import LoginPage from "./pages/Login/LoginPage";
 import RegisterPage from "./pages/Register/RegisterPage";
 import AuthRoute from "./Components/AuthRoute/AuthRoute";
 import CheckoutPage from "./pages/Checkout/CheckoutPage";
-import PaymentPage from "./pages/PaymentPage/PaymentPage";
+ import PaymentPage from "./pages/PaymentPage/PaymentPage";
 import OrderTrack from "./pages/OrderTrack/OrderTrack";
 import ProfilePage from "./pages/Profile/ProfilePage";
 import OrdersPage from "./pages/Orders/OrdersPage";
@@ -45,6 +45,7 @@ function AppRouter() {
             </AuthRoute>
           }
         />
+       
         <Route
           path="/track/:orderId"
           element={

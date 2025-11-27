@@ -46,29 +46,27 @@ router.post(
   })
 );
 
+/* ================= PAY ORDER (✅ FIXED) ================= */
 router.put(
   "/pay",
   handler(async (req, res) => {
-    try {
-      const { paymentId } = req.body;
-      console.log("paymentId=", paymentId);
+    const { paymentId } = req.body;
 
-      if (!paymentId) {
-        return res.status(BAD_REQUEST).send("Payment ID is required!");
-      }
-      const order = await getNewOrderForCurrentUser(req);
-      if (!order) {
-        return res.status(BAD_REQUEST).send("Order Not Found!");
-      }
-
-      order.paymentId = paymentId;
-      order.status = OrderStatus.PAYED;
-      await order.save();
-      res.send(order);
-    } catch (error) {
-      console.error("Error processing payment:", error);
-      res.status(500).send("Internal Server Error");
+    if (!paymentId) {
+      return res.status(BAD_REQUEST).send("Payment ID is required");
     }
+
+    const order = await getNewOrderForCurrentUser(req);
+    if (!order) {
+      return res.status(BAD_REQUEST).send("Order not found");
+    }
+
+    order.paymentId = paymentId;
+    order.status = OrderStatus.PAYED;
+    await order.save();
+
+    // ✅ IMPORTANT FIX
+    res.send({ orderId: order._id });
   })
 );
 

@@ -28,7 +28,7 @@ export const pay = async (paymentId) => {
   try {
     const { data } = await axios1?.put("/api/orders/pay", { paymentId });
     console.log(paymentId);
-    return data;
+    return data.orderId;
   } catch (error) {
     console.error("Error processing payment:", error);
     throw error;

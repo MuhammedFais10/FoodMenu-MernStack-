@@ -65,9 +65,9 @@ export default function OrdersPage() {
 
       {orders &&
         orders.map((order) => (
-          <div key={order.id} className={classes.order_summary}>
+          <div key={order._id} className={classes.order_summary}>
             <div className={classes.header}>
-              <span>{order.id}</span>
+              <span>{order._id}</span>
               <span>
                 <DateTime date={order.createdAt} />
               </span>
@@ -75,14 +75,14 @@ export default function OrdersPage() {
             </div>
             <div className={classes.items}>
               {order.items.map((item) => (
-                <Link key={item.food.id} to={`/food/${item.food.id}`}>
+                <Link key={item._id} to={`/food/${item.food._id}`}>
                   <img src={item.food.imageUrl} alt={item.food.name} />
                 </Link>
               ))}
             </div>
             <div className={classes.footer}>
               <div>
-                <Link to={`/track/${order.id}`}>Show Order</Link>
+                <Link to={`/track/${order._id}`}>Show Order</Link>
               </div>
               <div>
                 <span className={classes.price}>

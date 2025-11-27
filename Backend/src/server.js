@@ -6,6 +6,7 @@ import foodRouter from "./Router/food.router.js";
 import userRouter from "./Router/user.router.js";
 import orderRouter from "./Router/order.router.js";
 import uploadRouter from "./Router/upload.router.js";
+import paymentRouter from "./Router/razorepay.router.js";
 
 import { dbconnect } from "./config/database.config.js";
 dbconnect();
@@ -29,6 +30,7 @@ app.use("/api/foods", foodRouter);
 app.use("/api/users", userRouter);
 app.use("/api/orders", orderRouter);
 app.use("/api/upload", uploadRouter);
+app.use("/api/payment", paymentRouter);
 
 const publicFolder = path.join(__dirname, "public");
 app.use(express.static(publicFolder));
