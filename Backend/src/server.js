@@ -35,9 +35,9 @@ app.use("/api/payment", paymentRouter);
 const publicFolder = path.join(__dirname, "public");
 app.use(express.static(publicFolder));
 
-// app.get("/", (req, res) => {
-//   res.send("hello");
-// });
+app.get("/", (req, res) => {
+  res.send("hello");
+});
 
 // Handle SPA routing for the frontend
 app.get("*", (req, res) => {
@@ -45,7 +45,7 @@ app.get("*", (req, res) => {
   res.sendFile(indexFilePath);
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 6000;
 
 app.listen(PORT, () => {
   console.log(`Server Connected on PORT ${PORT}`);
