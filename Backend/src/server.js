@@ -34,9 +34,9 @@ app.use("/api/payment", paymentRouter);
 // const publicFolder = path.join(__dirname, "public");
 // app.use(express.static(publicFolder));
 
-app.get("/", (req, res) => {
-  res.send("hello");
-});
+// app.get("/", (req, res) => {
+//   res.send("hello");
+// });
 
 // Handle SPA routing for the frontend
 // app.get("*", (req, res) => {
