@@ -13,7 +13,7 @@ import { dbconnect } from "./config/database.config.js";
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = dirname(__filename);
 const app = express();
-await dbconnect();
+
 app.use(
   cors({
     credentials: true,
@@ -25,6 +25,17 @@ app.use(
   }),
 );
 app.use(express.json());
+
+app.use(async (req, res, next) => {
+  try {
+    await dbconnect();
+    next();
+  } catch (err) {
+    console.error("❌ DB Middleware Error:", err);
+    res.status(500).json({ message: "Database connection failed" });
+  }
+});
+
 app.use("/api/foods", foodRouter);
 app.use("/api/users", userRouter);
 app.use("/api/orders", orderRouter);

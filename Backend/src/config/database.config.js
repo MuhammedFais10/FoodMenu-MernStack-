@@ -86,18 +86,28 @@
 
 import mongoose from "mongoose";
 
-let isConnected = false;
+let cached = global.mongoose;
 
-export const dbconnect = async () => {
-  try {
-    if (isConnected) return;
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
+}
 
-    console.log("🔄 Connecting to MongoDB...");
-    await mongoose.connect(process.env.MONGO_URI);
-
-    isConnected = true;
-    console.log("✅ MongoDB Connected");
-  } catch (error) {
-    console.log("❌ Database connection error:", error);
+export async function dbconnect() {
+  if (cached.conn) {
+    return cached.conn;
   }
-};
+
+  if (!cached.promise) {
+    cached.promise = mongoose
+      .connect(process.env.MONGO_URI, {
+        bufferCommands: false,
+      })
+      .then((mongoose) => {
+        console.log("✅ MongoDB Connected (cached)");
+        return mongoose;
+      });
+  }
+
+  cached.conn = await cached.promise;
+  return cached.conn;
+}
