@@ -23,7 +23,7 @@ app.use(
       "https://main-portfolio-ruddy-alpha.vercel.app",
       "https://frontendfoodmine.vercel.app",
     ],
-  })
+  }),
 );
 app.use(express.json());
 app.use("/api/foods", foodRouter);
@@ -32,18 +32,18 @@ app.use("/api/orders", orderRouter);
 app.use("/api/upload", uploadRouter);
 app.use("/api/payment", paymentRouter);
 
-const publicFolder = path.join(__dirname, "public");
-app.use(express.static(publicFolder));
+// const publicFolder = path.join(__dirname, "public");
+// app.use(express.static(publicFolder));
 
 app.get("/", (req, res) => {
   res.send("hello");
 });
 
 // Handle SPA routing for the frontend
-app.get("*", (req, res) => {
-  const indexFilePath = path.join(publicFolder, "index.html");
-  res.sendFile(indexFilePath);
-});
+// app.get("*", (req, res) => {
+//   const indexFilePath = path.join(publicFolder, "index.html");
+//   res.sendFile(indexFilePath);
+// });
 
 const PORT = process.env.PORT || 5000;
 
