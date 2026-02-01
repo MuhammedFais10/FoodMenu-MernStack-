@@ -9,12 +9,11 @@ import uploadRouter from "./Router/upload.router.js";
 import paymentRouter from "./Router/razorepay.router.js";
 
 import { dbconnect } from "./config/database.config.js";
-dbconnect();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = dirname(__filename);
 const app = express();
-
+await dbconnect();
 app.use(
   cors({
     credentials: true,
@@ -45,8 +44,9 @@ app.get("/", (req, res) => {
 //   res.sendFile(indexFilePath);
 // });
 
-const PORT = process.env.PORT || 5000;
+// const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  console.log(`Server Connected on PORT ${PORT}`);
-});
+// app.listen(PORT, () => {
+//   console.log(`Server Connected on PORT ${PORT}`);
+// });
+export default app;
